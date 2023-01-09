@@ -4,8 +4,12 @@
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.CategoryDAO">
 
-  <select id="getAllCategory" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO" >
+  <select id="getAllCategory" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
     SELECT * FROM category
+  </select>
+
+  <select id="getById" parameterType="int" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+    SELECT * FROM category where category_id = #{id}
   </select>
 
 
