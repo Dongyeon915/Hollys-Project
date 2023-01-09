@@ -4,6 +4,7 @@ import com.naver.ehd9567.hollys_backend.dao.MenuDAO;
 import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +30,9 @@ public class MenuController {
     @Operation(summary = "모든 메뉴를 조회한다.",
         description = "모든 메뉴를 조회하는 동작을 수행합니다.",
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 모든 메뉴를 반환합니다.", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "200", description = "[성공] 모든 메뉴를 반환합니다.", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MenuDTO.class)), examples = {
+                @ExampleObject(value = "[{\"menu_id\":1,\"name\":\"Coffee\"},{\"menu_id\":2,\"name\":\"Beverage\"},{\"menu_id\":3,\"name\":\"Food\"},{\"menu_id\":4,\"name\":\"Snack\"}]")
+            }))
         }
     )
     @GetMapping
