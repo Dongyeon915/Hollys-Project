@@ -14,6 +14,6 @@ public interface CategoryDAO {
     public List<CategoryDTO> getByMenu_fk(Integer menu_fk);
 
     public CategoryDTO getByType(String type);
-
+    //
     public int setCategory(CategoryDTO setDTO);
 }
