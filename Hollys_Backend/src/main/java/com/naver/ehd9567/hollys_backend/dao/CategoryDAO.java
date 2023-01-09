@@ -15,5 +15,5 @@ public interface CategoryDAO {
 
     public CategoryDTO getByType(String type);
 
-    public CategoryDTO setCategory(CategoryDTO setDTO);
+    public int setCategory(CategoryDTO setDTO);
 }
