@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/menu")
 public class MenuController {
 
-  @Autowired
-  private MenuDAO menuDAO;
+    @Autowired
+    private MenuDAO menuDAO;
 
-  @GetMapping
-  public List<MenuDTO> getByAllMenu() {
-    return menuDAO.getByAllMenu();
-  }
-
-  @GetMapping("/id{id}")
-  public ResponseEntity<Object> getByMenuId(@PathVariable Integer id) {
-    MenuDTO menuDTOId = menuDAO.getByMenuId(id);
-    if (menuDTOId == null) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("id확인 바람");
-    } else {
-      return ResponseEntity.status(HttpStatus.OK).body(menuDTOId);
+    @GetMapping
+    public List<MenuDTO> getByAllMenu() {
+        return menuDAO.getByAllMenu();
     }
-  }
 
-  @GetMapping("/name")
-  public ResponseEntity<Object> getByMenuName(@RequestParam("name") String name) {
-    MenuDTO menuName = menuDAO.getByMenuName(name);
-    if (menuName == null) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당" + name + " 은 메뉴에 없습니다");
+    @GetMapping("/id{id}")
+    public ResponseEntity<Object> getByMenuId(@PathVariable Integer id) {
+        MenuDTO menuDTOId = menuDAO.getByMenuId(id);
+        if (menuDTOId == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("id확인 바람");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(menuDTOId);
+        }
     }
-    return ResponseEntity.status(HttpStatus.OK).body(menuName);
-  }
+
+    @GetMapping("/name")
+    public ResponseEntity<Object> getByMenuName(@RequestParam("name") String name) {
+        MenuDTO menuName = menuDAO.getByMenuName(name);
+        if (menuName == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당" + name + " 은 메뉴에 없습니다");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(menuName);
+    }
 }
