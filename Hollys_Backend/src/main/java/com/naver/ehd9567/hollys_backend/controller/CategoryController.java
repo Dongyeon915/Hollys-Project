@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -41,6 +42,15 @@ public class CategoryController {
     }
     return ResponseEntity.status(HttpStatus.OK).body(menuFk);
   }
+
+  
+  //@RequestParam 사용한 Type 찾기
+  @GetMapping("/type")
+  public ResponseEntity<Object> getByType(@RequestParam("type") String type){
+   CategoryDTO categoryDTO = categoryDAO.getByType(type);
+   return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+  }
+
 
 }
 

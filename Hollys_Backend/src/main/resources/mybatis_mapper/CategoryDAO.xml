@@ -8,13 +8,18 @@
     SELECT * FROM category
   </select>
 
-  <select id="getById" parameterType="int" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+  <select id="getById" parameterType="int"
+    resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
     SELECT * FROM category where category_id = #{id}
   </select>
 
-  <select id="getByMenu_fk" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO" parameterType="Integer">
+  <select id="getByMenu_fk" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+    parameterType="Integer">
     SELECT * FROM category where menu_fk = #{menu_fk}
   </select>
 
+  <select id="getByType" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO" parameterType="String">
+    SELECT * FROM category where type = #{type}
+  </select>
 
 </mapper>
