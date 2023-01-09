@@ -27,6 +27,9 @@ public class CategoryController {
   @GetMapping("/{id}")
   public ResponseEntity<Object> getById(@PathVariable Integer id){
     CategoryDTO categoryDAOById = categoryDAO.getById(id);
+    if (categoryDAOById == null){
+     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("들어온 값이 없습니다");
+    }
     return ResponseEntity.status(HttpStatus.OK).body(categoryDAOById);
   }
 
