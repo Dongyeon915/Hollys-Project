@@ -22,4 +22,8 @@
     SELECT * FROM category where type = #{type}
   </select>
 
+  <insert id="setCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+    INSERT INTO category values(#{category_id},#{menu_fk},#{type})
+  </insert>
+
 </mapper>
