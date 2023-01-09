@@ -54,9 +54,12 @@ public class CategoryController {
   }
 
   @PostMapping("/setCategory")
-  public CategoryDTO setCategory(@RequestBody CategoryDTO setDTO) {
+  public ResponseEntity<Object> setCategory(@RequestBody CategoryDTO setDTO) {
     CategoryDTO setCategory = categoryDAO.setCategory(setDTO);
-    return setCategory;
+    if (setCategory == null) {
+      ResponseEntity.status(HttpStatus.BAD_REQUEST).body("구성을 다시 확인 후 추가해주세요");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(setCategory);
   }
 }
 
