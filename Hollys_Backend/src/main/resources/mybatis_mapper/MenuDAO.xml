@@ -7,5 +7,9 @@
     SELECT * FROM menu;
   </select>
 
+  <select id="getByMenuId" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO"
+    parameterType="Integer">
+    SELECT * FROM menu where menu_id = #{id}
+  </select>
 
 </mapper>
