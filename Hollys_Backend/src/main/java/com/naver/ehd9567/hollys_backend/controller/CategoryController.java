@@ -16,41 +16,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/category")
 public class CategoryController {
 
-  @Autowired
-  private CategoryDAO categoryDAO;
+    @Autowired
+    private CategoryDAO categoryDAO;
 
-  //모든걸 조회시 리스트로 받아야 검색이 가능하다
-  @GetMapping("/allcategory")
-  public List getAllCategory() {
-    return categoryDAO.getAllCategory();
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<Object> getById(@PathVariable Integer id) {
-    CategoryDTO categoryDAOById = categoryDAO.getById(id);
-    if (categoryDAOById == null) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("들어온 값이 없습니다");
+    //모든걸 조회시 리스트로 받아야 검색이 가능하다
+    @GetMapping("/allcategory")
+    public List getAllCategory() {
+        return categoryDAO.getAllCategory();
     }
-    return ResponseEntity.status(HttpStatus.OK).body(categoryDAOById);
-  }
 
-  @GetMapping("/menu_fk/{menu_fk}")
-  public ResponseEntity<Object> getByMenu_fk(@PathVariable Integer menu_fk){
-    List<CategoryDTO> menuFk = categoryDAO.getByMenu_fk(menu_fk);
-    if (menuFk == null){
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("값이 없습니다");
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable Integer id) {
+        CategoryDTO categoryDAOById = categoryDAO.getById(id);
+        if (categoryDAOById == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("들어온 값이 없습니다");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(categoryDAOById);
     }
-    return ResponseEntity.status(HttpStatus.OK).body(menuFk);
-  }
 
-  
-  //@RequestParam 사용한 Type 찾기
-  @GetMapping("/type")
-  public ResponseEntity<Object> getByType(@RequestParam("type") String type){
-   CategoryDTO categoryDTO = categoryDAO.getByType(type);
-   return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
-  }
+    @GetMapping("/menu_fk/{menu_fk}")
+    public ResponseEntity<Object> getByMenu_fk(@PathVariable Integer menu_fk) {
+        List<CategoryDTO> menuFk = categoryDAO.getByMenu_fk(menu_fk);
+        if (menuFk.size() == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("값이 없습니다");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(menuFk);
+    }
 
-
+    //@RequestParam 사용한 Type 찾기
+    @GetMapping("/type")
+    public ResponseEntity<Object> getByType(@RequestParam("type") String type) {
+        CategoryDTO categoryDTO = categoryDAO.getByType(type);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+    }
 }
 
