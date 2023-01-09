@@ -10,4 +10,5 @@ public interface CategoryDAO {
 
   public List<CategoryDTO> getAllCategory();
   public CategoryDTO getById(Integer id);
+  public List<CategoryDTO> getByMenu_fk(Integer menu_fk);
 }
