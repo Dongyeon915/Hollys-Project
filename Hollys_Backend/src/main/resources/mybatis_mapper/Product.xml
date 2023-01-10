@@ -4,4 +4,7 @@
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.ProductDAO">
 
+  <select id="getAllProduct" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO">
+    SELECT * FROM product
+  </select>
 </mapper>
