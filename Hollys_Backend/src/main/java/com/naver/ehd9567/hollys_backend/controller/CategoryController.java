@@ -2,6 +2,13 @@ package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.CategoryDAO;
 import com.naver.ehd9567.hollys_backend.dto.CategoryDTO;
+import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,46 +25,92 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/category")
 public class CategoryController {
 
-    @Autowired
-    private CategoryDAO categoryDAO;
+  @Autowired
+  private CategoryDAO categoryDAO;
 
-    //모든걸 조회시 리스트로 받아야 검색이 가능하다
-    @GetMapping("/allcategory")
-    public List getAllCategory() {
-        return categoryDAO.getAllCategory();
-    }
+  @Operation(summary = "모든 카테고리를 조회 합니다.",
+      description = "모든 카테고리를 조회하는 동작을 수행합니다."
+  )
+  @GetMapping("/allcategory")
+  public List getAllCategory() {
+    return categoryDAO.getAllCategory();
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getById(@PathVariable Integer id) {
-        CategoryDTO categoryDAOById = categoryDAO.getById(id);
-        if (categoryDAOById == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("들어온 값이 없습니다");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(categoryDAOById);
+  @Operation(summary = "카테고리의 ID를 조회합니다.",
+      description = "카테고리의 ID를 조회하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "id", description = "카테고리의 ID를 의미합니다.", example = "1")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 해당 ID를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 ID를 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("해당하는 ID가 존재하지 않습니다.")}))
+      }
+  )
+  @GetMapping("/{id}")
+  public ResponseEntity<Object> getById(@PathVariable Integer id) {
+    CategoryDTO categoryDAOById = categoryDAO.getById(id);
+    if (categoryDAOById == null) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("들어온 값이 없습니다");
     }
-    
-    @GetMapping("/menu_fk/{menu_fk}")
-    public ResponseEntity<Object> getByMenu_fk(@PathVariable Integer menu_fk) {
-        List<CategoryDTO> menuFk = categoryDAO.getByMenu_fk(menu_fk);
-        if (menuFk.size() == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("값이 없습니다");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(menuFk);
-    }
+    return ResponseEntity.status(HttpStatus.OK).body(categoryDAOById);
+  }
 
-    //@RequestParam 사용한 Type 찾기
-    @GetMapping("/type")
-    public ResponseEntity<Object> getByType(@RequestParam("type") String type) {
-        CategoryDTO categoryDTO = categoryDAO.getByType(type);
-        return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+  @Operation(summary = "카테고리의 메뉴fK를 조회합니다.",
+      description = "카테고리의 메뉴fK를 조회하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "menu_fk", description = "카테고리의 menu_fk를 의미합니다.", example = "1")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 해당 menu_fk를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 menu_fk를 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("해당하는 menu_fk가 존재하지 않습니다.")}))
+      }
+  )
+  @GetMapping("/menu_fk/{menu_fk}")
+  public ResponseEntity<Object> getByMenu_fk(@PathVariable Integer menu_fk) {
+    List<CategoryDTO> menuFk = categoryDAO.getByMenu_fk(menu_fk);
+    if (menuFk.size() == 0) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("값이 없습니다");
     }
+    return ResponseEntity.status(HttpStatus.OK).body(menuFk);
+  }
 
-    @PostMapping("/setCategory")
-    public ResponseEntity<Object> setCategory(@RequestBody CategoryDTO setDTO) {
-        int result = categoryDAO.setCategory(setDTO);
-        if (result != 1) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("구성을 다시 확인 후 추가해주세요");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(setDTO);
+
+  @Operation(summary = "카테고리의 Type을 조회합니다.",
+      description = "카테고리의 Type을 조회하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "type", description = "카테고리의 DtoType을 의미합니다.", example = "에스프레소")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 해당 Type을 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 Type을 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("해당하는 Type이 존재하지 않습니다.")}))
+      }
+  )
+  @GetMapping("/type")
+  public ResponseEntity<Object> getByType(@RequestParam("type") String type) {
+    CategoryDTO categoryDTO = categoryDAO.getByType(type);
+    return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+  }
+
+  @Operation(summary = "카테고리를 추가 합니다.",
+      description = "카테고리의 Type을 조회하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "type", description = "카테고리의 Type을 의미합니다.")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 추가한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 추가할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("추가한 카테고리가 존재하지 않습니다.")}))
+      }
+  )
+  @PostMapping("/setCategory")
+  public ResponseEntity<Object> setCategory(@RequestBody CategoryDTO setDTO) {
+    int result = categoryDAO.setCategory(setDTO);
+    if (result != 1) {
+      ResponseEntity.status(HttpStatus.BAD_REQUEST).body("구성을 다시 확인 후 추가해주세요");
     }
+    return ResponseEntity.status(HttpStatus.OK).body(setDTO);
+  }
 }
