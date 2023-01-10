@@ -36,8 +36,8 @@ public class MenuController {
         }
     )
     @GetMapping
-    public List<MenuDTO> getByAllMenu() {
-        return menuDAO.getByAllMenu();
+    public List<MenuDTO> getAllMenu() {
+        return menuDAO.getAllMenu();
     }
 
     @Operation(summary = "ID로 메뉴를 조회한다.",
@@ -52,8 +52,8 @@ public class MenuController {
         }
     )
     @GetMapping("/id/{id}")
-    public ResponseEntity<Object> getByMenuId(@PathVariable Integer id) {
-        MenuDTO menuDTOId = menuDAO.getByMenuId(id);
+    public ResponseEntity<Object> getMenuById(@PathVariable Integer id) {
+        MenuDTO menuDTOId = menuDAO.getMenuById(id);
         if (menuDTOId == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ID에 해당하는 메뉴가 존재하지 않습니다.");
         } else {
@@ -73,8 +73,8 @@ public class MenuController {
         }
     )
     @GetMapping("/name/{name}")
-    public ResponseEntity<Object> getByMenuName(@PathVariable("name") String name) {
-        MenuDTO menuName = menuDAO.getByMenuName(name);
+    public ResponseEntity<Object> getMenuByName(@PathVariable("name") String name) {
+        MenuDTO menuName = menuDAO.getMenuByName(name);
         if (menuName == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("요청하신" + name + " 가 존재하지 않습니다.");

@@ -3,16 +3,16 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.MenuDAO">
-  <select id="getByAllMenu" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO">
+  <select id="getAllMenu" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO">
     SELECT * FROM menu;
   </select>
 
-  <select id="getByMenuId" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO"
+  <select id="getMenuById" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO"
     parameterType="Integer">
     SELECT * FROM menu where menu_id = #{id}
   </select>
 
-  <select id="getByMenuName" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO"
+  <select id="getMenuByName" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO"
     parameterType="String">
     SELECT * FROM menu where name = #{name}
   </select>
