@@ -58,4 +58,25 @@ public class ProductController {
     }
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
+
+  @Operation(summary = "상품의 이름를 조회합니다.",
+      description = "상품의 이름을 조회하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "name", description = "상품의 이름를 의미합니다.", example = "카페라떼")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 해당 이름의 상품를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 이름의 상품을 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("해당하는 이름의 상품이 존재하지 않습니다.")}))
+      }
+  )
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Object> getProductByName(@PathVariable String name) {
+    ProductDTO productDTO = productDAO.getProductByName(name);
+    if (productDTO == null) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이름을 다시 확인 해주세요.");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(productDTO);
+  }
+
 }

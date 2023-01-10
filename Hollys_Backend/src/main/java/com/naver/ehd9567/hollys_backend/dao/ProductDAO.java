@@ -9,4 +9,5 @@ public interface ProductDAO {
 
   public List<ProductDTO> getAllProducts();
   public ProductDTO getProductById(int id);
+  public ProductDTO getProductByName(String name);
 }

@@ -12,4 +12,8 @@
     parameterType="int">
     SELECT * FROM product where id = #{id}
   </select>
+
+  <select id="getProductByName" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO" parameterType="string">
+    SELECT * FROM product where name = #{name}
+  </select>
 </mapper>
