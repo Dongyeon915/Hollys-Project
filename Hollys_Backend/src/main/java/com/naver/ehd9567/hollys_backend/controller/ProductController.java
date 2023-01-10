@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -77,6 +79,23 @@ public class ProductController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이름을 다시 확인 해주세요.");
     }
     return ResponseEntity.status(HttpStatus.OK).body(productDTO);
+  }
+
+  @Operation(summary = "새로운 상품을 등록합니다..",
+      description = "새로운 상품을 등록하는 동작을 수행합니다.",
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 새로 등록한 상품를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 상품을 등록할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("해당하는 상품이 등록되지 않았습니다.")}))
+      }
+  )
+  @PostMapping("/setProduct")
+  public ResponseEntity<Object> setProduct(@RequestBody ProductDTO product) {
+    int productDTO = productDAO.setProduct(product);
+    if (productDTO != 1) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("항목을 다시 입력해주세요.");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(product);
   }
 
 }

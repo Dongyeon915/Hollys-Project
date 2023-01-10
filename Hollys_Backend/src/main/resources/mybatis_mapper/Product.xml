@@ -13,7 +13,14 @@
     SELECT * FROM product where id = #{id}
   </select>
 
-  <select id="getProductByName" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO" parameterType="string">
+  <select id="getProductByName" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO"
+    parameterType="string">
     SELECT * FROM product where name = #{name}
+  </select>
+
+  <select id="setProduct" parameterType="com.naver.ehd9567.hollys_backend.dto.ProductDTO"
+    resultType="int">
+    INSERT INTO product
+    values(#{id},#{name},#{name_eng},#{info},#{price},#{image_url},#{category_fk});
   </select>
 </mapper>
