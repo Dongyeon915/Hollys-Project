@@ -17,4 +17,8 @@
     SELECT * FROM menu where name = #{name}
   </select>
 
+  <insert id="setMenu" parameterType="com.naver.ehd9567.hollys_backend.dto.MenuDTO">
+    INSERT INTO menu values(#{menu_id},#{name})
+  </insert>
+
 </mapper>

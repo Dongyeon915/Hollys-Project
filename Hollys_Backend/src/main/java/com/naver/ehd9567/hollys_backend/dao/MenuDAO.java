@@ -10,4 +10,5 @@ public interface MenuDAO {
   public List<MenuDTO> getAllMenu();
   public MenuDTO getMenuById(Integer id);
   public MenuDTO getMenuByName(String name);
+  public int setMenu(MenuDTO menuDTO);
 }
