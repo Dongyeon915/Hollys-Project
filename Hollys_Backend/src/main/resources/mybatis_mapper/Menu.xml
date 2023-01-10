@@ -25,4 +25,8 @@
     UPDATE menu SET name = #{name} where menu_id = #{menu_id};
   </update>
 
+  <delete id="deleteMenu" parameterType="com.naver.ehd9567.hollys_backend.dto.MenuDTO">
+    DELETE FROM menu where menu_id = #{menu_id}
+  </delete>
+
 </mapper>

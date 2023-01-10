@@ -16,4 +16,6 @@ public interface MenuDAO {
   public int setMenu(MenuDTO menuDTO);
 
   public int updateMenu(MenuDTO menu);
+
+  public int deleteMenu(MenuDTO menu_id);
 }
