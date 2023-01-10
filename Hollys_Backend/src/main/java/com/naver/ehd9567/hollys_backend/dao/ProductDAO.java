@@ -14,4 +14,6 @@ public interface ProductDAO {
   public ProductDTO getProductByName(String name);
 
   public int setProduct(ProductDTO product);
+
+  public int putProduct(ProductDTO putID);
 }
