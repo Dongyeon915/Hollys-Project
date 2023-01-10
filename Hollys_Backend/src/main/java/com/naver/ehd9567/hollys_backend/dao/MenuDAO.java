@@ -8,7 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MenuDAO {
 
   public List<MenuDTO> getAllMenu();
+
   public MenuDTO getMenuById(Integer id);
+
   public MenuDTO getMenuByName(String name);
+
   public int setMenu(MenuDTO menuDTO);
+
+  public int updateMenu(MenuDTO menu);
 }

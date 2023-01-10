@@ -11,12 +11,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -101,6 +103,26 @@ public class MenuController {
     int menu = menuDAO.setMenu(menuDTO);
     if (menu != 1) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("메뉴 입력을 다시 확인해주세요");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(menuDTO);
+  }
+
+  @Operation(summary = "메뉴를 수정한다.",
+      description = "메뉴를 수정합니다.",
+      parameters = {
+          @Parameter(name = "MenuDTO", description = "menuDTO 타입을 의미합니다.")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 메뉴를 수정합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 등록 정보의 오류가 있습니다..", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("메뉴 입력을 다시 확인해주세요.")}))
+      }
+  )
+  @PutMapping("/update")
+  public ResponseEntity<Object> updateMenu(@RequestBody MenuDTO menuDTO) {
+    int result = menuDAO.updateMenu(menuDTO);
+    if (result != 1) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("값을 재 확인 해주세요.");
     }
     return ResponseEntity.status(HttpStatus.OK).body(menuDTO);
   }

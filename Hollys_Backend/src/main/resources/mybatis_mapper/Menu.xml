@@ -21,4 +21,8 @@
     INSERT INTO menu values(#{menu_id},#{name})
   </insert>
 
+  <update id="updateMenu" parameterType="com.naver.ehd9567.hollys_backend.dto.MenuDTO">
+    UPDATE menu SET name = #{name} where menu_id = #{menu_id};
+  </update>
+
 </mapper>
