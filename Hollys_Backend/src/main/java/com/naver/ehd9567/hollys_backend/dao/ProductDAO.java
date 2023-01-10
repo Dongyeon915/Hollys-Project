@@ -7,5 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductDAO {
 
-  public List<ProductDTO> getAllProduct();
+  public List<ProductDTO> getAllProducts();
+  public ProductDTO getProductById(int id);
 }
