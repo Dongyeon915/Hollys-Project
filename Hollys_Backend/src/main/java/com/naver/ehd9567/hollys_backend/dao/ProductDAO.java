@@ -16,4 +16,6 @@ public interface ProductDAO {
   public int setProduct(ProductDTO product);
 
   public int putProduct(ProductDTO putID);
+
+  public int deleteProduct(int id);
 }
