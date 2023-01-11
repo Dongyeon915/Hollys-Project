@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -112,5 +113,25 @@ public class CategoryController {
       ResponseEntity.status(HttpStatus.BAD_REQUEST).body("구성을 다시 확인 후 추가해주세요");
     }
     return ResponseEntity.status(HttpStatus.OK).body(setDTO);
+  }
+
+  @Operation(summary = "카테고리를 수정 합니다.",
+      description = "카테고리를 수정하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "putDTO", description = "카테고리의 CategoryDTO를 의미합니다.")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 수정한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 수정할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("수정한 카테고리가 존재하지 않습니다.")}))
+      }
+  )
+  @PutMapping("/putCategory")
+  public ResponseEntity<Object> putCategory(@RequestBody CategoryDTO putDTO) {
+    int result = categoryDAO.putCategory(putDTO);
+    if (result != 1) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정할 값을 재 확인 해주세요.");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(putDTO);
   }
 }

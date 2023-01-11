@@ -18,12 +18,17 @@
     SELECT * FROM category where menu_fk = #{menu_fk}
   </select>
 
-  <select id="getByType" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO" parameterType="String">
+  <select id="getByType" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+    parameterType="String">
     SELECT * FROM category where type = #{type}
   </select>
 
-  <insert id="setCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO" useGeneratedKeys="true" keyColumn="category_id">
+  <insert id="setCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+    useGeneratedKeys="true" keyColumn="category_id">
     INSERT INTO category values(#{menu_fk}, #{type})
   </insert>
 
+  <update id="putCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+    UPDATE category SET menu_fk = #{menu_fk},type = #{type} where category_id = #{category_id}
+  </update>
 </mapper>
