@@ -31,4 +31,8 @@
   <update id="putCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
     UPDATE category SET menu_fk = #{menu_fk},type = #{type} where category_id = #{category_id}
   </update>
+
+  <delete id="deleteCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+    DELETE FROM category where category_id = #{category_id}
+  </delete>
 </mapper>

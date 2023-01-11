@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -133,5 +134,25 @@ public class CategoryController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("수정할 값을 재 확인 해주세요.");
     }
     return ResponseEntity.status(HttpStatus.OK).body(putDTO);
+  }
+
+  @Operation(summary = "카테고리를 삭제 합니다.",
+      description = "카테고리를 삭제하는 동작을 수행합니다.",
+      parameters = {
+          @Parameter(name = "deleteDTO", description = "카테고리의 CategoryDTO를 의미합니다.")
+      },
+      responses = {
+          @ApiResponse(responseCode = "200", description = "[성공] 해당 카테고리를 삭제 합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+          @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 삭제할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
+              @ExampleObject("삭제할 카테고리가 존재하지 않습니다.")}))
+      }
+  )
+  @DeleteMapping("/deleteCategory")
+  public ResponseEntity<Object> deleteCategory(@RequestBody int category_id) {
+    int result = categoryDAO.deleteCategory(category_id);
+    if (result != 1) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 값을 재 확인 해주세요.");
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(category_id);
   }
 }

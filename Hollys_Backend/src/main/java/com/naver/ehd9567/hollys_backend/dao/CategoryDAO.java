@@ -19,4 +19,6 @@ public interface CategoryDAO {
   public int setCategory(CategoryDTO setDTO);
 
   public int putCategory(CategoryDTO putDTO);
+
+  public int deleteCategory(int category_id);
 }
