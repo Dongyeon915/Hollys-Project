@@ -29,4 +29,8 @@
     DELETE FROM menu where menu_id = #{menu_id}
   </delete>
 
+<!--  <select id="getMapByMenu" resultType="com.naver.ehd9567.hollys_backend.dto.MenuDTO" parameterType="map">-->
+<!--  SELECT menu_id = #{menu_id},name = #{name} FROM menu;-->
+<!--  </select>-->
+
 </mapper>

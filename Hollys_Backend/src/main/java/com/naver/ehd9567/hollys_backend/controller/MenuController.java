@@ -11,8 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "menu", description = "메뉴에 관련된 동작을 수행하는 API")
@@ -148,4 +146,24 @@ public class MenuController {
     }
     return ResponseEntity.status(HttpStatus.OK).body(menu_id);
   }
+
+//  @Operation(summary = "키,값으로 메뉴를 조회 합니다.",
+//      description = "키,값으로 메뉴를 조회 합니다.",
+//      parameters = {
+//          @Parameter(name = "Map<Integer, String>", description = "키,값을 의미합니다.")
+//      },
+//      responses = {
+//          @ApiResponse(responseCode = "200", description = "[성공] 메뉴를 조회합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+//          @ApiResponse(responseCode = "400", description = "[실패] 입력 값의 오류가 있습니다..", content = @Content(mediaType = "text/plain", examples = {
+//              @ExampleObject("입력 값을 다시 확인해주세요.")}))
+//      }
+//  )
+//  @PostMapping("/map")
+//  public ResponseEntity<Object> getMapByMenu(@RequestBody MenuDTO menuIdnameMap) {
+//    Map<Integer,String> menuDTO = (Map<Integer, String>) menuDAO.getMapByMenu(menuIdnameMap);
+//    if (menuDTO == null) {
+//      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("키 값을 확인해주세요.");
+//    }
+//    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(menuIdnameMap);
+//  }
 }
