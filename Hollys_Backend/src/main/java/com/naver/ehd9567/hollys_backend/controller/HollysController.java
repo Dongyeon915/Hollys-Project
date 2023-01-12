@@ -20,7 +20,7 @@ public class HollysController {
     )
     @GetMapping
     public String helloHollys() {
-        return "Hello, Hollys!";
+        return "index.html";
     }
 
 }
