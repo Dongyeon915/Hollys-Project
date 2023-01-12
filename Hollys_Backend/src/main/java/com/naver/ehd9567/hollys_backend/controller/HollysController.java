@@ -22,9 +22,6 @@ public class HollysController {
 
   @Autowired
   HollysDAO hollysDAO;
-  CategoryDAO categoryDAO;
-  MenuDAO menuDAO;
-  ProductDAO productDAO;
 
   @Operation(summary = "Hollys 메인 화면.",
       description = "Hollys의 메인 화면."
