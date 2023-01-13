@@ -44,7 +44,7 @@ public class CategoryController {
             @Parameter(name = "id", description = "카테고리의 ID를 의미합니다.", example = "1")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 해당 ID를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+            @ApiResponse(responseCode = "200", description = "[성공] 해당 ID를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 ID를 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("해당하는 ID가 존재하지 않습니다.")}))
         }
@@ -64,7 +64,7 @@ public class CategoryController {
             @Parameter(name = "menu_fk", description = "카테고리의 menu_fk를 의미합니다.", example = "1")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 해당 menu_fk를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+            @ApiResponse(responseCode = "200", description = "[성공] 해당 menu_fk를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 menu_fk를 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("해당하는 menu_fk가 존재하지 않습니다.")}))
         }
@@ -85,7 +85,7 @@ public class CategoryController {
             @Parameter(name = "type", description = "카테고리의 DtoType을 의미합니다.", example = "에스프레소")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 해당 Type을 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+            @ApiResponse(responseCode = "200", description = "[성공] 해당 Type을 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 Type을 조회할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("해당하는 Type이 존재하지 않습니다.")}))
         }
@@ -102,7 +102,7 @@ public class CategoryController {
             @Parameter(name = "type", description = "카테고리의 Type을 의미합니다.")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 추가한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+            @ApiResponse(responseCode = "200", description = "[성공] 추가한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 추가할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("추가한 카테고리가 존재하지 않습니다.")}))
         }
@@ -122,7 +122,8 @@ public class CategoryController {
             @Parameter(name = "putDTO", description = "카테고리의 CategoryDTO를 의미합니다.")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 수정한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+
+            @ApiResponse(responseCode = "200", description = "[성공] 수정한 카테고리를 반환합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 수정할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("수정한 카테고리가 존재하지 않습니다.")}))
         }
@@ -142,7 +143,7 @@ public class CategoryController {
             @Parameter(name = "deleteDTO", description = "카테고리의 CategoryDTO를 의미합니다.")
         },
         responses = {
-            @ApiResponse(responseCode = "200", description = "[성공] 해당 카테고리를 삭제 합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MenuDTO.class))),
+            @ApiResponse(responseCode = "200", description = "[성공] 해당 카테고리를 삭제 합니다.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryDTO.class))),
             @ApiResponse(responseCode = "400", description = "[실패] 해당 카테고리를 삭제할수 없습니다.", content = @Content(mediaType = "text/plain", examples = {
                 @ExampleObject("삭제할 카테고리가 존재하지 않습니다.")}))
         }
