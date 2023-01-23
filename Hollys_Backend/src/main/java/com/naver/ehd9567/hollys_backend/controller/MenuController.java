@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,7 +100,7 @@ public class MenuController {
       }
   )
   @PostMapping("/setMenues/")
-  public ResponseEntity<Object> setMenu(@RequestBody MenuDTO menuDTO) {
+  public ResponseEntity<Object> setMenu(@RequestBody @Valid MenuDTO menuDTO) {
     int menu = menuDAO.setMenu(menuDTO);
     if (menu != 1) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("메뉴 입력을 다시 확인해주세요");
