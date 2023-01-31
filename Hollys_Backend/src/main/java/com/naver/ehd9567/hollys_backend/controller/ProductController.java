@@ -1,7 +1,6 @@
 package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.ProductDAO;
-import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
 import com.naver.ehd9567.hollys_backend.dto.ProductDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -10,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class ProductController {
                 @ExampleObject("해당하는 상품이 존재하지 않습니다.")}))
         }
     )
-    @GetMapping("/getAllProduct")
+    @GetMapping
     public List<ProductDTO> getAllProducts() {
         return productDAO.getAllProducts();
     }
@@ -57,7 +57,7 @@ public class ProductController {
     )
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Object> getProductById(@PathVariable int id) {
+    public ResponseEntity<Object> getProductById(@Valid @PathVariable Integer id) {
         ProductDTO result = productDAO.getProductById(id);
         if (result == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("존재하지 않는 Id입니다");
@@ -77,7 +77,7 @@ public class ProductController {
         }
     )
     @GetMapping("/name/{name}")
-    public ResponseEntity<Object> getProductByName(@PathVariable String name) {
+    public ResponseEntity<Object> getProductByName(@Valid @PathVariable String name) {
         ProductDTO productDTO = productDAO.getProductByName(name);
         if (productDTO == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이름을 다시 확인 해주세요.");
@@ -93,8 +93,8 @@ public class ProductController {
                 @ExampleObject("해당하는 상품이 등록되지 않았습니다.")}))
         }
     )
-    @PostMapping("/setProduct")
-    public ResponseEntity<Object> setProduct(@RequestBody ProductDTO product) {
+    @PostMapping
+    public ResponseEntity<Object> setProduct(@Valid @RequestBody ProductDTO product) {
         int productDTO = productDAO.setProduct(product);
         if (productDTO != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("항목을 다시 입력해주세요.");
@@ -110,8 +110,8 @@ public class ProductController {
                 @ExampleObject("해당하는 상품이 수정되지 않았습니다.")}))
         }
     )
-    @PutMapping("/putProduct")
-    public ResponseEntity<Object> putProduct(@RequestBody ProductDTO putID) {
+    @PutMapping
+    public ResponseEntity<Object> putProduct(@Valid @RequestBody ProductDTO putID) {
         int result = productDAO.putProduct(putID);
         if (result != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("입력 값을 확인 해주세요.");
@@ -127,8 +127,8 @@ public class ProductController {
                 @ExampleObject("해당하는 상품이 삭제되지 않았습니다.")}))
         }
     )
-    @DeleteMapping("/deleteProduct")
-    public ResponseEntity<Object> deleteProduct(@RequestBody int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduct(@Valid @PathVariable Integer id) {
         int productDTO = productDAO.deleteProduct(id);
         if (productDTO != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 값을 확인 해주세요.");

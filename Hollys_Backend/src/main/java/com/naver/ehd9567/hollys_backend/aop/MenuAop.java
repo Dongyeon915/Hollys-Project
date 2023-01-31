@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 //@Aspect와 @Component Annotation을 이용하여 AOP 기능 구현을 시작합니다.
 @Aspect
+
 @Component
 public class MenuAop {
 //  @Pointcut을 이용하여 AOP가 적용될 대상을 지정해야 합니다.
@@ -16,7 +17,6 @@ public class MenuAop {
     public void aopRange(){
 
     }
-
 //    @Before("aopRange()")
 ////  클라이언트가 호출한 비즈니스 Method의 정보가 JoinPoint에 담겨있으며 JointPoint를 사용하여 각종 정보 확인이 가능합니다.
 //    public void beforAction(JoinPoint joinPoint){

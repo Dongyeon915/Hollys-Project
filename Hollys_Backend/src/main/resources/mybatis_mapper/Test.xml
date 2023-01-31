@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.ehd9567.hollys_backend.dao.TestDAO">
+<!-- keyColumn db명 , keyProperty pojo명, useGeneratedKeys -->
+<!-- primary키 사용시  -->
+  <insert id="setTest" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.naver.ehd9567.hollys_backend.dto.TestDTO">
+    INSERT INTO test(test_value) values (#{test_value})
+  </insert>
+
+  <select id="getTest" resultType="com.naver.ehd9567.hollys_backend.dto.TestDTO" parameterType="string">
+    SELECT * FROM test
+  </select>
+
+  <update id="putTest" parameterType="com.naver.ehd9567.hollys_backend.dto.TestDTO">
+    UPDATE test SET test_value = #{test_value} where id = #{id}
+  </update>
+
+  <delete id="deleteTest" parameterType="int">
+    DELETE FROM test where id  = #{id}
+  </delete>
+
+</mapper>

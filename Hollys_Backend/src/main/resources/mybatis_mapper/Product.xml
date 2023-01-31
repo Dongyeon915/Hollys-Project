@@ -4,27 +4,26 @@
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.ProductDAO">
 
-  <select id="getAllProducts" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO">
+  <insert id="setProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    INSERT INTO product(name, name_eng, info, price, image_url, category_fk)
+    values(#{name}, #{name_eng}, #{info}, #{price}, #{image_url}, #{category_fk})
+  </insert>
+
+  <select id="getAllProducts" resultType="Product">
     SELECT * FROM product
   </select>
 
-  <select id="getProductById" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO"
+  <select id="getProductById" resultType="Product"
     parameterType="int">
     SELECT * FROM product where id = #{id}
   </select>
 
-  <select id="getProductByName" resultType="com.naver.ehd9567.hollys_backend.dto.ProductDTO"
+  <select id="getProductByName" resultType="Product"
     parameterType="string">
     SELECT * FROM product where name = #{name}
   </select>
 
-  <select id="setProduct" parameterType="com.naver.ehd9567.hollys_backend.dto.ProductDTO"
-    resultType="int">
-    INSERT INTO product
-    values(#{id},#{name},#{name_eng},#{info},#{price},#{image_url},#{category_fk})
-  </select>
-
-  <update id="putProduct" parameterType="com.naver.ehd9567.hollys_backend.dto.ProductDTO">
+  <update id="putProduct" parameterType="com.naver.ehd9567.hollys_backend.dto.ProductDTO" >
     UPDATE product SET name = #{name},name_eng = #{name_eng},info = #{info},price =
     #{price},image_url = #{image_url},category_fk = #{category_fk} where id = #{id}
   </update>

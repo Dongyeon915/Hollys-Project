@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- Aliases 약어사용 -->
+  <typeAliases>
+    <typeAlias alias="Product" type="com.naver.ehd9567.hollys_backend.dto.ProductDTO"/>
+    <typeAlias alias="Menu" type="com.naver.ehd9567.hollys_backend.dto.MenuDTO"/>
+  </typeAliases>
+</configuration>
