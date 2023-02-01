@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categorys")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoryController {
 
@@ -35,7 +35,7 @@ public class CategoryController {
     @Operation(summary = "모든 카테고리를 조회 합니다.",
         description = "모든 카테고리를 조회하는 동작을 수행합니다."
     )
-    @GetMapping("/allcategory")
+    @GetMapping
     public List getAllCategory() {
         return categoryDAO.getAllCategory();
     }
@@ -51,7 +51,7 @@ public class CategoryController {
                 @ExampleObject("해당하는 ID가 존재하지 않습니다.")}))
         }
     )
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Object> getById(@PathVariable Integer id) {
         CategoryDTO categoryDAOById = categoryDAO.getById(id);
         if (categoryDAOById == null) {
@@ -71,7 +71,7 @@ public class CategoryController {
                 @ExampleObject("해당하는 menu_fk가 존재하지 않습니다.")}))
         }
     )
-    @GetMapping("/menu_fk/{menu_fk}")
+    @GetMapping("/menufk/{menu_fk}")
     public ResponseEntity<Object> getByMenu_fk(@PathVariable Integer menu_fk) {
         List<CategoryDTO> menuFk = categoryDAO.getByMenu_fk(menu_fk);
         if (menuFk.size() == 0) {
@@ -92,8 +92,8 @@ public class CategoryController {
                 @ExampleObject("해당하는 Type이 존재하지 않습니다.")}))
         }
     )
-    @GetMapping("/type")
-    public ResponseEntity<Object> getByType(@RequestParam("type") String type) {
+    @GetMapping("/type/{type}")
+    public ResponseEntity<Object> getByType(@PathVariable String type) {
         CategoryDTO categoryDTO = categoryDAO.getByType(type);
         return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
     }
@@ -109,7 +109,7 @@ public class CategoryController {
                 @ExampleObject("추가한 카테고리가 존재하지 않습니다.")}))
         }
     )
-    @PostMapping("/setCategory")
+    @PostMapping
     public ResponseEntity<Object> setCategory(@RequestBody CategoryDTO setDTO) {
         int result = categoryDAO.setCategory(setDTO);
         if (result != 1) {
@@ -130,7 +130,7 @@ public class CategoryController {
                 @ExampleObject("수정한 카테고리가 존재하지 않습니다.")}))
         }
     )
-    @PutMapping("/putCategory")
+    @PutMapping
     public ResponseEntity<Object> putCategory(@RequestBody CategoryDTO putDTO) {
         int result = categoryDAO.putCategory(putDTO);
         if (result != 1) {
@@ -150,8 +150,8 @@ public class CategoryController {
                 @ExampleObject("삭제할 카테고리가 존재하지 않습니다.")}))
         }
     )
-    @DeleteMapping("/deleteCategory")
-    public ResponseEntity<Object> deleteCategory(@RequestBody int category_id) {
+    @DeleteMapping("/{category_id}")
+    public ResponseEntity<Object> deleteCategory(@PathVariable int category_id) {
         int result = categoryDAO.deleteCategory(category_id);
         if (result != 1) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 값을 재 확인 해주세요.");

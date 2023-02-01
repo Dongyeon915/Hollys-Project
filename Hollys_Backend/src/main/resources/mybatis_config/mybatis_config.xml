@@ -6,5 +6,6 @@
   <typeAliases>
     <typeAlias alias="Product" type="com.naver.ehd9567.hollys_backend.dto.ProductDTO"/>
     <typeAlias alias="Menu" type="com.naver.ehd9567.hollys_backend.dto.MenuDTO"/>
+    <typeAlias alias="Category" type="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"/>
   </typeAliases>
 </configuration>

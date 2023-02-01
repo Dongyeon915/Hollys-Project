@@ -4,35 +4,34 @@
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.CategoryDAO">
 
-  <select id="getAllCategory" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+  <select id="getAllCategory" resultType="Category">
     SELECT * FROM category
   </select>
 
-  <select id="getById" parameterType="int"
-    resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+  <select id="getById" parameterType="int" resultType="Category">
     SELECT * FROM category where category_id = #{id}
   </select>
 
-  <select id="getByMenu_fk" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+  <select id="getByMenu_fk" resultType="Category"
     parameterType="Integer">
     SELECT * FROM category where menu_fk = #{menu_fk}
   </select>
 
-  <select id="getByType" resultType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+  <select id="getByType" resultType="Category"
     parameterType="String">
     SELECT * FROM category where type = #{type}
   </select>
 
-  <insert id="setCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO"
+  <insert id="setCategory" parameterType="Category"
     useGeneratedKeys="true" keyColumn="category_id">
-    INSERT INTO category values(#{menu_fk}, #{type})
+    INSERT INTO category values(#{category_id},#{menu_fk}, #{type})
   </insert>
 
-  <update id="putCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+  <update id="putCategory" parameterType="Category">
     UPDATE category SET menu_fk = #{menu_fk},type = #{type} where category_id = #{category_id}
   </update>
 
-  <delete id="deleteCategory" parameterType="com.naver.ehd9567.hollys_backend.dto.CategoryDTO">
+  <delete id="deleteCategory" parameterType="Category">
     DELETE FROM category where category_id = #{category_id}
   </delete>
 
