@@ -1,6 +1,7 @@
 package com.naver.ehd9567.hollys_backend.dao;
 
-import com.naver.ehd9567.hollys_backend.dto.ProductDTO;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductDTO;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,4 +18,8 @@ public interface ProductDAO {
   public int putProduct(ProductDTO putID);
 
   public int deleteProduct(int id);
+
+  public ProductRes getProductMap(int id);
+
+  public List<ProductRes> getProductInfos();
 }

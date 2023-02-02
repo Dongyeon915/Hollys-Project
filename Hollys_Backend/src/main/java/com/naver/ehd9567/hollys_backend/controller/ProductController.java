@@ -1,7 +1,8 @@
 package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.ProductDAO;
-import com.naver.ehd9567.hollys_backend.dto.ProductDTO;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductDTO;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -134,5 +135,16 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제 값을 확인 해주세요.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(id);
+    }
+
+    @GetMapping("/details/{id}")
+    public Object getProductMap(@PathVariable Integer id){
+        return productDAO.getProductMap(id);
+    }
+
+
+    @GetMapping("/details")
+    public List<ProductRes> getAllProductInfos() {
+        return productDAO.getProductInfos();
     }
 }

@@ -1,4 +1,4 @@
-package com.naver.ehd9567.hollys_backend.dto;
+package com.naver.ehd9567.hollys_backend.dto.categoryDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;

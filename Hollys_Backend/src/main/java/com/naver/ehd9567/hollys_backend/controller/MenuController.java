@@ -1,7 +1,7 @@
 package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.MenuDAO;
-import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
+import com.naver.ehd9567.hollys_backend.dto.menuDto.MenuDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -147,5 +147,10 @@ public class MenuController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제하는 값을 확인 해주세요");
         }
         return ResponseEntity.status(HttpStatus.OK).body(menu_id);
+    }
+
+    @GetMapping("/{id}/menus")
+    public Object getCategoryWithMenusById(@PathVariable int id) {
+        return menuDAO.getCategoryWithMenusById(id);
     }
 }

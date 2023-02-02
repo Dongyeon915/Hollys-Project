@@ -1,7 +1,6 @@
 package com.naver.ehd9567.hollys_backend.dao;
 
-import com.naver.ehd9567.hollys_backend.dto.CategoryDTO;
-import com.naver.ehd9567.hollys_backend.dto.ProductDTO;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,10 +1,6 @@
 package com.naver.ehd9567.hollys_backend.aop;
 
-import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 //@Aspect와 @Component Annotation을 이용하여 AOP 기능 구현을 시작합니다.

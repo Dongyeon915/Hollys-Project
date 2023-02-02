@@ -1,6 +1,6 @@
 package com.naver.ehd9567.hollys_backend.aop;
 
-import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
+import com.naver.ehd9567.hollys_backend.dto.menuDto.MenuDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

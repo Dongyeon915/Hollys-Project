@@ -1,8 +1,7 @@
 package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.CategoryDAO;
-import com.naver.ehd9567.hollys_backend.dto.CategoryDTO;
-import com.naver.ehd9567.hollys_backend.dto.MenuDTO;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,11 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/categorys")
+@RequestMapping("/categories")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoryController {
 

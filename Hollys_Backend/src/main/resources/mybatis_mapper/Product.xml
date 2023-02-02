@@ -3,6 +3,16 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.naver.ehd9567.hollys_backend.dao.ProductDAO">
+  <resultMap id="mytest" type="Product">
+    <constructor>
+      <arg column="name" javaType="string"/>
+      <arg column="name_eng" javaType="string" />
+    </constructor>
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="name_eng;" property="name_eng" javaType="string" />
+    <result column="info" property="info" javaType="string" jdbcType="VARCHAR"/>
+  </resultMap>
 
   <insert id="setProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     INSERT INTO product(name, name_eng, info, price, image_url, category_fk)
@@ -11,6 +21,12 @@
 
   <select id="getAllProducts" resultType="Product">
     SELECT * FROM product
+  </select>
+
+  <select id="getProductInfos" resultMap="ProductMap2">
+    SELECT * FROM product
+    join category on product.category_fk = category.category_id
+    join menu on menu.menu_id = category.menu_fk;
   </select>
 
   <select id="getProductById" resultType="Product"
@@ -31,4 +47,37 @@
   <delete id="deleteProduct" parameterType="Product">
     delete from product where id = #{id}
   </delete>
+
+  <resultMap id="ProductMap" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResponse">
+    <id property="product_id" column="category_fk" javaType="int"/>
+<!--    <result property="name" column="name" javaType="string"/>-->
+<!--    <result property="name_eng" column="name_eng" javaType="string"/>-->
+<!--    <result property="info" column="info" javaType="string"/>-->
+<!--    <result property="price" column="price" javaType="int"/>-->
+<!--    <result property="image_url" column="image_url" javaType="string"/>-->
+    <association property="product" javaType="Product" autoMapping="true"/>
+    <association property="category" javaType="Category" autoMapping="true"/>
+    <association property="menu" javaType="Menu" autoMapping="true"/>
+  </resultMap>
+
+  <resultMap id="ProductMap2" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes">
+    <id property="id" column="id" javaType="int"/>
+    <result property="name" column="name" javaType="string"/>
+    <result property="name_eng" column="name_eng" javaType="string"/>
+    <result property="info" column="info" javaType="string"/>
+    <result property="price" column="price" javaType="int"/>
+    <result property="image_url" column="image_url" javaType="string"/>
+    <association property="category" javaType="Category" foreignColumn="menu_fk">
+      <result property="category_id" column="category_id"/>
+      <result property="type" column="type"/>
+      <result property="menu_fk" column="menu_fk"/>
+    </association>
+    <association property="menu" javaType="Menu" autoMapping="true"/>
+  </resultMap>
+
+  <select id="getProductMap" parameterType="int" resultMap="ProductMap2">
+    SELECT * FROM product
+      join category on product.category_fk = category.category_id
+      join menu on menu.menu_id = category.menu_fk where id = #{id};
+  </select>
 </mapper>
