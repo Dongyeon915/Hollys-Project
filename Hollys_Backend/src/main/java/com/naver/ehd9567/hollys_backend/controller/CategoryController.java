@@ -4,6 +4,7 @@ import com.naver.ehd9567.hollys_backend.dao.CategoryDAO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryWithMenuRes;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryWithMenuTypeNameRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -168,5 +169,11 @@ public class CategoryController {
     @GetMapping("/withMenu")
     public List<CategoryWithMenuRes> getCategoryWithMenu(){
         return categoryDAO.getCategoryWithMenu();
+    }
+
+// 카테고리의 와 menu테이블 조인시 category_id인 타입과 이름
+    @GetMapping("/idWithMenuByTypeName/{id}")
+    public CategoryWithMenuTypeNameRes getCategoryMenuType(@PathVariable int id){
+        return categoryDAO.getCategoryMenuType(id);
     }
 }
