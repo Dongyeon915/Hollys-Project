@@ -158,5 +158,8 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(category_id);
     }
 
-
+    @GetMapping("/detailCategoryMenu/{id}")
+    public CategoryRes getCategoryWithMenu(@PathVariable int id){
+        return categoryDAO.getCategoryWithMenu(id);
+    }
 }

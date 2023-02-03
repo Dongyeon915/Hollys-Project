@@ -27,13 +27,28 @@
     INSERT INTO category values(#{category_id},#{menu_fk}, #{type})
   </insert>
 
-  <update id="putCategory" parameterType="Category">
+  <update id="putCategory" parameterType="int">
     UPDATE category SET menu_fk = #{menu_fk},type = #{type} where category_id = #{category_id}
   </update>
 
-  <delete id="deleteCategory" parameterType="Category">
+  <delete id="deleteCategory" parameterType="int">
     DELETE FROM category where category_id = #{category_id}
   </delete>
 
+<!--0203-->
+<!-- resultMap id 내가 사용할 이름 -->
+  <resultMap id="categoryWithMenu" type="com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes">
+    <id property="category_id" column="category_id" javaType="int"/>
+    <result property="menu_fk" column="menu_fk" javaType="int"/>
+    <result property="type" column="type" javaType="string"/>
+<!--  association autoMapping은 result 태그를 안만들어도 맵핑이 가능해진다.  -->
+    <association property="menuDTO" javaType="Menu" autoMapping="true">
+    </association>
+  </resultMap>
+
+<!-- resultMap 으로 내가만든 resultMap사용가능    resutlSet -> HashMap -> resultMap -->
+  <select id="getCategoryWithMenu" parameterType="int" resultMap="categoryWithMenu">
+    SELECT * FROM category join menu on category.menu_fk = menu.menu_id where category.category_id = #{id}
+  </select>
 
 </mapper>

@@ -22,5 +22,5 @@ public interface CategoryDAO {
 
   public int deleteCategory(int category_id);
 
-
+  public CategoryRes getCategoryWithMenu(int id);
 }
