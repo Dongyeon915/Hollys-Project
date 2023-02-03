@@ -29,16 +29,16 @@
     DELETE FROM menu where menu_id = #{menu_id}
   </delete>
 
-  <resultMap id="allMenuWithCategoryMap"
-    type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuRes">
-    <id property="menu_id" column="menu_id" javaType="int"/>
-    <result property="name" column="name" javaType="string"/>
-    <collection property="categories" ofType="Category" foreignColumn="menu_fk">
-      <id property="category_id" column="category_id"/>
-      <result property="type" column="type"/>
-      <result property="menu_fk" column="menu_fk"/>
-    </collection>
-  </resultMap>
+<!--  <resultMap id="allMenuWithCategoryMap"-->
+<!--    type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuRes">-->
+<!--    <id property="menu_id" column="menu_id" javaType="int"/>-->
+<!--    <result property="name" column="name" javaType="string"/>-->
+<!--    <collection property="categories" ofType="Category" foreignColumn="menu_fk">-->
+<!--      <id property="category_id" column="category_id"/>-->
+<!--      <result property="type" column="type"/>-->
+<!--      <result property="menu_fk" column="menu_fk"/>-->
+<!--    </collection>-->
+<!--  </resultMap>-->
 
 
   <!--  <select id="getCategoryWithMenusById" parameterType="int" resultMap="allMenuWithCategoryMap">-->

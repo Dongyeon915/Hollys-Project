@@ -3,6 +3,7 @@ package com.naver.ehd9567.hollys_backend.controller;
 import com.naver.ehd9567.hollys_backend.dao.CategoryDAO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryWithMenuRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -158,8 +159,14 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(category_id);
     }
 
+//    0203작성
     @GetMapping("/detailCategoryMenu/{id}")
-    public CategoryRes getCategoryWithMenu(@PathVariable int id){
-        return categoryDAO.getCategoryWithMenu(id);
+    public CategoryRes getCategoryWithMenuById(@PathVariable int id){
+        return categoryDAO.getCategoryWithMenuById(id);
+    }
+//    카테고리와 메뉴를 조인후 메뉴를 배열로 가져가기
+    @GetMapping("/withMenu")
+    public List<CategoryWithMenuRes> getCategoryWithMenu(){
+        return categoryDAO.getCategoryWithMenu();
     }
 }

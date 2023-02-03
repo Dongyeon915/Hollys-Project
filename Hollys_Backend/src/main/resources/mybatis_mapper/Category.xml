@@ -37,18 +37,29 @@
 
 <!--0203-->
 <!-- resultMap id 내가 사용할 이름 -->
-  <resultMap id="categoryWithMenu" type="com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes">
+  <resultMap id="CategoryWithMenuById" type="com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes">
     <id property="category_id" column="category_id" javaType="int"/>
     <result property="menu_fk" column="menu_fk" javaType="int"/>
     <result property="type" column="type" javaType="string"/>
 <!--  association autoMapping은 result 태그를 안만들어도 맵핑이 가능해진다.  -->
-    <association property="menuDTO" javaType="Menu" autoMapping="true">
-    </association>
+    <association property="menuDTO" javaType="Menu" autoMapping="true"/>
   </resultMap>
 
 <!-- resultMap 으로 내가만든 resultMap사용가능    resutlSet -> HashMap -> resultMap -->
-  <select id="getCategoryWithMenu" parameterType="int" resultMap="categoryWithMenu">
+  <select id="getCategoryWithMenuById" parameterType="int" resultMap="CategoryWithMenuById">
     SELECT * FROM category join menu on category.menu_fk = menu.menu_id where category.category_id = #{id}
+  </select>
+
+<!-- 카테고리와 메뉴를 조인후 메뉴를 배열로 가져가기 -->
+  <resultMap id="categoryWithMenu" type="com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryWithMenuRes">
+    <id property="category_id" column="category_id" javaType="int"/>
+    <result property="menu_fk" column="menu_fk" javaType="int"/>
+    <result property="type" column="type" javaType="string"/>
+    <collection property="menus" ofType="Menu" autoMapping="true"/>
+  </resultMap>
+
+  <select id="getCategoryWithMenu" resultMap="categoryWithMenu">
+    SELECT * FROM category join menu on category.menu_fk = menu.menu_id
   </select>
 
 </mapper>

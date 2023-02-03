@@ -2,6 +2,7 @@ package com.naver.ehd9567.hollys_backend.dao;
 
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryWithMenuRes;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,5 +23,7 @@ public interface CategoryDAO {
 
   public int deleteCategory(int category_id);
 
-  public CategoryRes getCategoryWithMenu(int id);
+  public CategoryRes getCategoryWithMenuById(int id);
+
+  public List<CategoryWithMenuRes> getCategoryWithMenu();
 }
