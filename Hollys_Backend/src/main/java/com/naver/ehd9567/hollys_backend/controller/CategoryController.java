@@ -2,6 +2,7 @@ package com.naver.ehd9567.hollys_backend.controller;
 
 import com.naver.ehd9567.hollys_backend.dao.CategoryDAO;
 import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO;
+import com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -156,4 +157,6 @@ public class CategoryController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(category_id);
     }
+
+
 }

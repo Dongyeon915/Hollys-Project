@@ -29,7 +29,8 @@
     DELETE FROM menu where menu_id = #{menu_id}
   </delete>
 
-  <resultMap id="allMenuWithCategoryMap" type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuRes">
+  <resultMap id="allMenuWithCategoryMap"
+    type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuRes">
     <id property="menu_id" column="menu_id" javaType="int"/>
     <result property="name" column="name" javaType="string"/>
     <collection property="categories" ofType="Category" foreignColumn="menu_fk">
@@ -40,11 +41,25 @@
   </resultMap>
 
 
-  <select id="getCategoryWithMenusById" parameterType="int" resultMap="allMenuWithCategoryMap">
-<!--    SELECT menu.menu_id, menu.name, category.category_id, category.type FROM menu join category on-->
-<!--    menu.menu_id = category.menu_fk where menu.menu_id = #{id};-->
-    SELECT menu.menu_id, menu.name, category.category_id, category.type FROM menu join category on
-    menu.menu_id = category.menu_fk where menu.menu_id = #{id};
+  <!--  <select id="getCategoryWithMenusById" parameterType="int" resultMap="allMenuWithCategoryMap">-->
+  <!--&lt;!&ndash;    SELECT menu.menu_id, menu.name, category.category_id, category.type FROM menu join category on&ndash;&gt;-->
+  <!--&lt;!&ndash;    menu.menu_id = category.menu_fk where menu.menu_id = #{id};&ndash;&gt;-->
+  <!--    SELECT menu.menu_id, menu.name, category.category_id, category.type FROM menu join category on-->
+  <!--    menu.menu_id = category.menu_fk where menu.menu_id = #{id};-->
+  <!--  </select>-->
+
+  <resultMap id="menuDetailTest" type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuResTest">
+    <id property="menu_id" column="menu_id" javaType="int"/>
+    <result property="name" column="name" javaType="string"/>
+    <collection property="categoryListDto" ofType="Category">
+      <id property="category_id" column="category_id"/>
+      <result property="menu_fk" column="menu_fk"/>
+      <result property="type" column="type"/>
+    </collection>
+  </resultMap>
+
+  <select id="getMenuDetail" resultMap="menuDetailTest" parameterType="int">
+    SELECT * FROM menu join category on menu.menu_id = category.menu_fk where menu.menu_id = #{id};
   </select>
 
 </mapper>

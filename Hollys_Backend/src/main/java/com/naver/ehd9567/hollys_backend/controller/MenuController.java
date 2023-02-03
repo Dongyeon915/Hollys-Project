@@ -149,8 +149,13 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.OK).body(menu_id);
     }
 
-    @GetMapping("/{id}/menus")
-    public Object getCategoryWithMenusById(@PathVariable int id) {
-        return menuDAO.getCategoryWithMenusById(id);
+//    @GetMapping("/{id}/menus")
+//    public Object getCategoryWithMenusById(@PathVariable int id) {
+//        return menuDAO.getCategoryWithMenusById(id);
+//    }
+
+    @GetMapping("/detail/{id}")
+    public Object menuDetail(@PathVariable int id){
+        return menuDAO.getMenuDetail(id);
     }
 }
