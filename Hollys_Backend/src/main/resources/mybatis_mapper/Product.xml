@@ -6,15 +6,16 @@
   <resultMap id="mytest" type="Product">
     <constructor>
       <arg column="name" javaType="string"/>
-      <arg column="name_eng" javaType="string" />
+      <arg column="name_eng" javaType="string"/>
     </constructor>
     <id column="id" property="id"/>
     <result column="name" property="name"/>
-    <result column="name_eng;" property="name_eng" javaType="string" />
+    <result column="name_eng;" property="name_eng" javaType="string"/>
     <result column="info" property="info" javaType="string" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <insert id="setProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="setProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id"
+    keyColumn="id">
     INSERT INTO product(name, name_eng, info, price, image_url, category_fk)
     values(#{name}, #{name_eng}, #{info}, #{price}, #{image_url}, #{category_fk})
   </insert>
@@ -39,7 +40,7 @@
     SELECT * FROM product where name = #{name}
   </select>
 
-  <update id="putProduct" parameterType="Product" >
+  <update id="putProduct" parameterType="Product">
     UPDATE product SET name = #{name},name_eng = #{name_eng},info = #{info},price =
     #{price},image_url = #{image_url},category_fk = #{category_fk} where id = #{id}
   </update>
@@ -50,11 +51,11 @@
 
   <resultMap id="ProductMap" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResponse">
     <id property="product_id" column="category_fk" javaType="int"/>
-<!--    <result property="name" column="name" javaType="string"/>-->
-<!--    <result property="name_eng" column="name_eng" javaType="string"/>-->
-<!--    <result property="info" column="info" javaType="string"/>-->
-<!--    <result property="price" column="price" javaType="int"/>-->
-<!--    <result property="image_url" column="image_url" javaType="string"/>-->
+    <!--    <result property="name" column="name" javaType="string"/>-->
+    <!--    <result property="name_eng" column="name_eng" javaType="string"/>-->
+    <!--    <result property="info" column="info" javaType="string"/>-->
+    <!--    <result property="price" column="price" javaType="int"/>-->
+    <!--    <result property="image_url" column="image_url" javaType="string"/>-->
     <association property="product" javaType="Product" autoMapping="true"/>
     <association property="category" javaType="Category" autoMapping="true"/>
     <association property="menu" javaType="Menu" autoMapping="true"/>
@@ -77,7 +78,24 @@
 
   <select id="getProductMap" parameterType="int" resultMap="ProductMap2">
     SELECT * FROM product
-      join category on product.category_fk = category.category_id
-      join menu on menu.menu_id = category.menu_fk where id = #{id};
+    join category on product.category_fk = category.category_id
+    join menu on menu.menu_id = category.menu_fk where id = #{id};
   </select>
+
+  <!-- 빼고 출력하는방법 -->
+  <resultMap id="productWithCategoryType"
+    type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResTest">
+    <id property="id" column="id" javaType="int"/>
+    <result property="name" column="name" javaType="string"/>
+    <result property="price" column="price" javaType="int"/>
+    <association property="categoryDTO" javaType="Category">
+      <result property="type" column="type" javaType="string"/>
+    </association>
+  </resultMap>
+
+  <select id="getProductWithCategoryType" resultMap="productWithCategoryType">
+    SELECT product.id, product.name, product.price, category.type FROM product join category
+    on product.category_fk = category.category_id;
+  </select>
+
 </mapper>

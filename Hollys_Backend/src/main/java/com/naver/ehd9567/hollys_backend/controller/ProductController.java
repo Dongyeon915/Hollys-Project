@@ -3,6 +3,7 @@ package com.naver.ehd9567.hollys_backend.controller;
 import com.naver.ehd9567.hollys_backend.dao.ProductDAO;
 import com.naver.ehd9567.hollys_backend.dto.productDto.ProductDTO;
 import com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductResTest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -138,7 +139,7 @@ public class ProductController {
     }
 
     @GetMapping("/details/{id}")
-    public Object getProductMap(@PathVariable Integer id){
+    public Object getProductMap(@PathVariable Integer id) {
         return productDAO.getProductMap(id);
     }
 
@@ -146,5 +147,10 @@ public class ProductController {
     @GetMapping("/details")
     public List<ProductRes> getAllProductInfos() {
         return productDAO.getProductInfos();
+    }
+
+    @GetMapping("/withCategoryType")
+    public List<ProductResTest> getProductWithCategoryType() {
+        return productDAO.getProductWithCategoryType();
     }
 }

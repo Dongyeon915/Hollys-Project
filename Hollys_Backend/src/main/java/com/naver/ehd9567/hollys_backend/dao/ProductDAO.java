@@ -2,6 +2,7 @@ package com.naver.ehd9567.hollys_backend.dao;
 
 import com.naver.ehd9567.hollys_backend.dto.productDto.ProductDTO;
 import com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes;
+import com.naver.ehd9567.hollys_backend.dto.productDto.ProductResTest;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,4 +23,6 @@ public interface ProductDAO {
   public ProductRes getProductMap(int id);
 
   public List<ProductRes> getProductInfos();
+
+  public List<ProductResTest> getProductWithCategoryType();
 }
