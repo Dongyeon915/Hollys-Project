@@ -49,7 +49,7 @@
     delete from product where id = #{id}
   </delete>
 
-  <resultMap id="ProductMap" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResponse">
+  <resultMap id="ProductMap" type="ProductResponse">
     <id property="product_id" column="category_fk" javaType="int"/>
     <!--    <result property="name" column="name" javaType="string"/>-->
     <!--    <result property="name_eng" column="name_eng" javaType="string"/>-->
@@ -61,7 +61,7 @@
     <association property="menu" javaType="Menu" autoMapping="true"/>
   </resultMap>
 
-  <resultMap id="ProductMap2" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes">
+  <resultMap id="ProductMap2" type="ProductRes">
     <id property="id" column="id" javaType="int"/>
     <result property="name" column="name" javaType="string"/>
     <result property="name_eng" column="name_eng" javaType="string"/>
@@ -83,8 +83,7 @@
   </select>
 
   <!-- 빼고 출력하는방법 -->
-  <resultMap id="productWithCategoryType"
-    type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResTest">
+  <resultMap id="productWithCategoryType" type="ProductResTest">
     <id property="id" column="id" javaType="int"/>
     <result property="name" column="name" javaType="string"/>
     <result property="price" column="price" javaType="int"/>

@@ -7,5 +7,8 @@
     <typeAlias alias="Product" type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductDTO"/>
     <typeAlias alias="Menu" type="com.naver.ehd9567.hollys_backend.dto.menuDto.MenuDTO"/>
     <typeAlias alias="Category" type="com.naver.ehd9567.hollys_backend.dto.categoryDto.CategoryDTO"/>
+    <typeAlias type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResTest" alias="ProductResTest"/>
+    <typeAlias type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductRes" alias="ProductRes"/>
+    <typeAlias type="com.naver.ehd9567.hollys_backend.dto.productDto.ProductResponse" alias="ProductResponse"/>
   </typeAliases>
 </configuration>

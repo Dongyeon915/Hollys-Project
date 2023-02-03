@@ -19,6 +19,7 @@ import org.apache.ibatis.annotations.Param;
 public class ProductDTO {
 
     @Schema(description = "상품의 ID를 의미합니다.", example = "1")
+    @Min(1)
     private Integer id;
     @Schema(description = "상품의 이름를 의미합니다.", example = "프리미엄 블렌드 아메리카노")
     @NotBlank

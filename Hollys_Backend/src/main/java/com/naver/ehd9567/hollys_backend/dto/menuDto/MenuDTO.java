@@ -1,6 +1,7 @@
 package com.naver.ehd9567.hollys_backend.dto.menuDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.Data;
 public class MenuDTO {
 
     @Schema(description = "메뉴의 ID를 의미합니다.", example = "1")
+    @Min(1)
     private Integer menu_id;
     @Schema(description = "메뉴명을 의미합니다.", example = "Coffee")
     @NotBlank
